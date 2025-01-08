@@ -46,13 +46,16 @@ fun mutateSolution(solution: Solution, numProcessors: Int): List<Int> {
 
 fun optimize(tasks: List<Int>, numProcessors: Int, iterations: Int): Solution {
     var currentSolution = generateInitialSolution(tasks, numProcessors)
+
     for (i in 1..iterations) {
         val newAssignment = mutateSolution(currentSolution, numProcessors)
         val newSolution = evaluateSolution(tasks, newAssignment, numProcessors)
+
         if (newSolution.maxLoad < currentSolution.maxLoad) {
             currentSolution = newSolution
         }
     }
+
     return currentSolution
 }
 
